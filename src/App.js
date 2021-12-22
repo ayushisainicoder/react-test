@@ -8,7 +8,8 @@ import Player from './components/Player';
 import PropTypes from 'prop-types'
 import Card from './components/Card';
 import Players from './components/Home';
-import './hover.css';
+import Detail from './components/Detail';
+// import './hover.css';
 
 export default class App extends Component {
   render() {
@@ -16,24 +17,24 @@ export default class App extends Component {
       <>
       <Router>
         <NavBar title = "NBA Players List" home_page = "Home"/>
-        
+        <div className="container">
         {/* <Home /> */}
         {/* <Player first_name = "{detail.first_name}"/> */}
-        <Player />
+        {/* <Player /> */}
         {/* <Card /> */}
         
         <Switch>
-        <span>Hover over me!</span>
-    <div>I will show on hover</div>
+        {/* <span>Hover over me!</span>
+    <div>I will show on hover</div> */}
         {/* <Player/> */}
             {/* <Route exact path="/about">
               <About />
             </Route> */}
-            <Route exact path="/"></Route>
-            <Route exact path="/player"></Route>
-            <Route exact path="/detail"></Route>
+            <Route exact path="/" exact component={Home}></Route>
+            <Route exact path="/player"  exact component={Player}></Route>
+            {/* <Route exact path="/detail"  exact component={Detail}></Route> */}
           </Switch>
-
+        </div>
     </Router>
     </>
     )

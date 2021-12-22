@@ -1,17 +1,26 @@
 import React from 'react'
+import Card from './Card'
+export default function home() { 
 
-export default function home() {
-    return (
-        <div>
-            <h1>Home Page</h1>
-            <div class="card">
-                <h5 class="card-header">Featured</h5>
-                <div class="card-body">
-                    <h5 class="card-title">Special title treatment</h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
-                </div>
-                </div>
-        </div>
+    // let p = new Promise((resolve, reject) => {
+    //     let a = 1+2
+    //     if(a === 2){
+    //         resolve("Success")
+    //     }
+    //     else{
+    //         reject("failed")
+    //     }
+    // })   
+    // p.then((message)=>{
+    //     console.log("This is in the then " + message)
+    // })
+    // .catch((message)=>{
+    //     console.log("This is in the catch " + message)
+    // })
+    return (        
+        <div>            
+            <h1>Home Page</h1>            
+                
+        </div>   
     )
 }
