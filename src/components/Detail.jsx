@@ -5,7 +5,7 @@ export default function Detail(props) { 
        
     return (        
         <div>            
-            <h1>Details</h1>            
+            {/* <h1>Details</h1>             */}
             <Card/>            
             {/* <div class="card">                
             <h5 class="card-header">Featured</h5>               
@@ -18,3 +18,7 @@ export default function Detail(props) { 
         </div>   
     )
 }
+
+
+
+

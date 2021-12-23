@@ -3,17 +3,25 @@ import axios from "axios";
 import Loading from "./Loading";
 import ReactTooltip from "react-tooltip";
 import {BrowserRouter as Router, Switch, Route, Link, NavLink, } from "react-router-dom";
+import PropTypes from 'prop-types'
+
 // import './style.css';
 
 // import './hover.css';
 
-export default function Player() {
+export default function Player(props) {
+
+  const page = 0;
   const [state, setstate] = useState();
+  const [data, setData] = useState();
+  const [loader, setLoder] = useState([]);
+  const [pageno, setPage] = useState(page);
+    
   
   var options = {
     method: "GET",
     url: "https://free-nba.p.rapidapi.com/players",
-    params: { page: "0", per_page: "100" },
+    // params: { page: "0", per_page: "100" },
     headers: {
       "x-rapidapi-host": "free-nba.p.rapidapi.com",
       "x-rapidapi-key": "38e4232f19msh07c40a70d913576p1640d7jsn7cc597f9716e",
@@ -31,29 +39,43 @@ export default function Player() {
       });
   }, [state]);
 
+  useEffect(()=>{
+
+  }, [pageno]);
+
+  const scrollToEnd = () =>{
+    setPage(pageno + 1);
+  }
+
+  window.onscroll = function(){
+    if(
+      window.innerHeight + document.documentElement.scrollTop === document.documentElement.offsetHeight
+    ){
+      scrollToEnd(  )
+    }
+  }
   
   const styles = {
     border: "2px solid black",
     backgroundColor: "pink",
     margin: "20px 10px",
   };
+  
+  
+  const handleClick = ()=>{
+    console.log("It was clicked:",data);
+    // let newData = data.detail.first_name;
+    // setData(newData)
+    
+  }
+
+ 
+
   return (
     <>         
       <div>
-           
-        {/* <Router>
-          <Switch>
-            <Route path=" {detail.first_name} ">
-              <Player />
-            </Route>
-          </Switch>
-        </Router> */}
-         {/* <NavLink to="/about">About</NavLink>    */}   
-        {/* <div className="tooltip">
-          Hover over me           
-          <span className="tooltiptext">Tooltip text</span>           
-        </div>
-                   <h1>Player List</h1>            */}
+           <h1> <b> NBA Players List </b> </h1>
+        
         <table style={styles}>
           
                  
@@ -64,40 +86,28 @@ export default function Player() {
               borderSpacing: "5px",
             }}
           >
+           
                        <th>Id</th>           
                        <th>First Name</th>           
-                       {/* <th>Last Name</th>            
-                        <th>Height Feet</th>            
-                        <th>Height Inches</th> */}
-                       {/* <th>Team Details</th> */}           
-                       {/* <th>Team Id</th>            
-                        <th>Weight Pound</th> */}
-                               
+                     
+                             
           </thead>
                  
           <tbody>
-                   
+            {/* {loader.length > 0 && state?.map((detail, index) => {     */}
             {state?.map((detail, index) => {
               return (
                 <tr key={index}>
                    <td>{detail.id}</td>
-                  {/* <td>{props.first_name}</td> */} 
-                  {/* <NavLink to="/{detail.first_name}">About</NavLink>  */} 
+                   
                   <td>
-                    {/* <NavLink to="/{detail.first_name}" data-tip data-for="sadFace">                      
-                         {detail.first_name} 
-                     </NavLink>
-                     <ReactTooltip id="sadFace" type="warning" effect="solid">
-                       {detail.first_name} {detail.last_name}
-                     </ReactTooltip> */}
-
-                    {/* <NavLink to="/{detail.first_name}">
-                      {detail.first_name}
-                    </NavLink> */}
+                    
                     <ul className="list-group">
                       <li className="list-group-item" data-tip data-for="hovering">
-                      {/* <NavLink to="/{detail.id}"> i can perform this one also */}
-                        <NavLink to="/{detail.first_name}">
+                     
+                     
+                      
+                        <NavLink onClick={handleClick} to="/detail/">
                           {detail.first_name}
                         </NavLink>
                       </li>
@@ -107,12 +117,7 @@ export default function Player() {
                     </ul>
                   </td>
                                              
-                  {/* <td>{detail.first_name}</td>                                */}
-                  {/* <td>{detail.last_name}</td>                                
-                                     <td>{detail.height_feet}</td>                               
-                                     <td>{detail.height_inches}</td>                                
-                                     <td>{detail.team.id}</td>                                
-                                     <td>{detail.weight_pounds}</td> */}
+                  
                                        
                 </tr>
               );

@@ -9,6 +9,7 @@ import PropTypes from 'prop-types'
 import Card from './components/Card';
 import Players from './components/Home';
 import Detail from './components/Detail';
+import Loading from './components/Loading';
 // import './hover.css';
 
 export default class App extends Component {
@@ -20,19 +21,11 @@ export default class App extends Component {
         <div className="container">
         {/* <Home /> */}
         {/* <Player first_name = "{detail.first_name}"/> */}
-        {/* <Player /> */}
-        {/* <Card /> */}
-        
+       
         <Switch>
-        {/* <span>Hover over me!</span>
-    <div>I will show on hover</div> */}
-        {/* <Player/> */}
-            {/* <Route exact path="/about">
-              <About />
-            </Route> */}
             <Route exact path="/" exact component={Home}></Route>
             <Route exact path="/player"  exact component={Player}></Route>
-            {/* <Route exact path="/detail"  exact component={Detail}></Route> */}
+            <Route exact path="/detail"  exact component={Detail}></Route>
           </Switch>
         </div>
     </Router>
