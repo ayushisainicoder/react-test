@@ -4,6 +4,9 @@ import Loading from "./Loading";
 import ReactTooltip from "react-tooltip";
 import {BrowserRouter as Router, Switch, Route, Link, NavLink, } from "react-router-dom";
 import PropTypes from 'prop-types'
+import Detail from './Detail'
+import Card from './Card'
+import InfiniteScroll from "react-infinite-scroll-component";
 
 // import './style.css';
 
@@ -11,17 +14,18 @@ import PropTypes from 'prop-types'
 
 export default function Player(props) {
 
-  const page = 0;
+  // const page = 0;
   const [state, setstate] = useState();
   const [data, setData] = useState();
   const [loader, setLoder] = useState([]);
-  const [pageno, setPage] = useState(page);
+  const [page, setPage] = useState();
+  // const [pageno, setPage] = useState();
     
   
   var options = {
     method: "GET",
     url: "https://free-nba.p.rapidapi.com/players",
-    // params: { page: "0", per_page: "100" },
+    params: { page: "0", per_page: "100" },
     headers: {
       "x-rapidapi-host": "free-nba.p.rapidapi.com",
       "x-rapidapi-key": "38e4232f19msh07c40a70d913576p1640d7jsn7cc597f9716e",
@@ -33,27 +37,29 @@ export default function Player(props) {
       .then(function (response) {
           console.log("res",response)
         setstate(response.data.data);
+        
       })
       .catch(function (error) {
         console.error(error);
       });
-  }, [state]);
+  }, []);
+  console.log(state, "player state checking")
 
-  useEffect(()=>{
+  // useEffect(()=>{
 
-  }, [pageno]);
+  // }, [pageno]);
 
-  const scrollToEnd = () =>{
-    setPage(pageno + 1);
-  }
+  // const scrollToEnd = () =>{
+  //   setPage(pageno + 1);
+  // }
 
-  window.onscroll = function(){
-    if(
-      window.innerHeight + document.documentElement.scrollTop === document.documentElement.offsetHeight
-    ){
-      scrollToEnd(  )
-    }
-  }
+  // window.onscroll = function(){
+  //   if(
+  //     window.innerHeight + document.documentElement.scrollTop === document.documentElement.offsetHeight
+  //   ){
+  //     scrollToEnd( )
+  //   }
+  // }
   
   const styles = {
     border: "2px solid black",
@@ -72,7 +78,9 @@ export default function Player(props) {
  
 
   return (
-    <>         
+    
+    <>    
+    <InfiniteScroll dataLength = {Player.length} next={()=>setPage(page+1)} hasMore={true}>  
       <div>
            <h1> <b> NBA Players List </b> </h1>
         
@@ -107,13 +115,17 @@ export default function Player(props) {
                      
                      
                       
-                        <NavLink onClick={handleClick} to="/detail/">
-                          {detail.first_name}
-                        </NavLink>
+                        {/* <NavLink onClick={handleClick} to="/detail/"> */}
+                        <Link onClick={handleClick} to={`/Detail/${detail.id}`}>
+                        {/* <Link onClick={handleClick} to={`/detail/${detail.id}`}> */}
+                          {detail.first_name} 
+                          {/* </Link> */}
+                          <ReactTooltip id="hovering" place="top" type="warning" effect="solid">
+                            {detail.first_name} {detail.last_name}
+                          </ReactTooltip>
+                        </Link>
                       </li>
-                      <ReactTooltip id="hovering" place="top" type="warning" effect="solid">
-                        {detail.first_name} {detail.last_name}
-                      </ReactTooltip>
+                      
                     </ul>
                   </td>
                                              
@@ -127,10 +139,10 @@ export default function Player(props) {
              
         </table>
            
-        
+        {/* {isloading && <Loading/>} */}
         {/* <Loading />      */}
       </div>
-         
+      </InfiniteScroll>     
     </>
   );
 }

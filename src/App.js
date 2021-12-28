@@ -13,6 +13,13 @@ import Loading from './components/Loading';
 // import './hover.css';
 
 export default class App extends Component {
+  // constructor(props){
+  //   super(props)
+  //   this.state = {
+  //     count: 0
+  //   }
+  // }
+  
   render() {
     return (
       <>
@@ -21,11 +28,17 @@ export default class App extends Component {
         <div className="container">
         {/* <Home /> */}
         {/* <Player first_name = "{detail.first_name}"/> */}
-       
+        {/* <div>
+          <p>You clicked {this.state.count} times</p>
+          <button onClick={() => this.setState({ count: this.state.count + 1 })}>
+          Click me
+        </button> */}
+        {/* </div> */}
         <Switch>
             <Route exact path="/" exact component={Home}></Route>
             <Route exact path="/player"  exact component={Player}></Route>
-            <Route exact path="/detail"  exact component={Detail}></Route>
+            {/* <Route exact path="/detail/:id"  exact component={Detail}></Route> */}
+            <Route exact path="/detail/:id"  exact component={Detail}></Route>
           </Switch>
         </div>
     </Router>

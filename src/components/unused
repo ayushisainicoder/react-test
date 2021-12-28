@@ -298,3 +298,208 @@ export default function Player(props) {
     </>
   );
 }
+
+// player
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import ReactTooltip from "react-tooltip";
+import Loading from "../../components/layouts/Loading";
+
+const Players = (props) => {  
+  const [tooltipOpen, setTooltipOpen] = useState(false);  
+  const toggle = () => setTooltipOpen(!tooltipOpen);  
+  const records = useSelector((state) => ({ ...state.allPlayers }));  
+  const {isloading } = records;  
+  // console.log(records);  
+  let dispatch = useDispatch();
+  useEffect(() => {    
+  dispatch({ type: "GET_PLAYERS_LIST" });  
+}, [dispatch]);
+
+  
+  return (    
+     <div className="container">      
+     <div className="col-sm-6 justify-content-center mt-3">       
+      {records.records.map((items, index) => (          
+      <Link to={`/PlayerDetail/${items.id}`}>            
+      <ul className="list-group list-group-flush App">              
+      <li className="list-group-item" data-tip data-for="registerTip">               
+       {items.first_name}              
+       </li>              
+       <ReactTooltip id="registerTip" place="top" effect="solid">            
+        Welcome {items.first_name}              
+       </ReactTooltip>            
+       </ul>          
+       </Link>        
+       ))}           
+       {isloading && <Loading />}      
+       </div>       
+       </div>  
+       );
+      };
+
+export default Players;
+
+
+//player detail
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+import "../../style/style.css";
+
+const PlayerDetail = () => {
+  const player_detail = useSelector(
+    (state) => state.PlayerListDetails.player_detail
+  );
+
+
+  console.log(player_detail);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch({ type: "GET_SELECTED_PALYER_DETAILE" });
+  }, [dispatch]);
+
+  return (
+
+    <div className="container">
+      <div className="row justify-content-center mt-3">
+        <div className="card">
+          <div className="card-body">
+            <h5 className="card-title"></h5>
+            <h6 className="card-subtitle mb-2 text-muted">
+              First Name : {player_detail.first_name}
+            </h6>
+            <p className="card-text">Last Name : {player_detail.last_name}</p>
+            <p>Position : {player_detail.position}</p>
+         
+            <Link to="/players" className="card-link">
+              Back
+            </Link>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default PlayerDetail;
+
+let id = window.location.pathname.split("/")[2];
+      url: 'https://free-nba.p.rapidapi.com/players/'+id,
+
+
+import axios from "axios";
+
+var config = {
+  headers: {
+    params: { per_page: "25", page: "0" },
+    "x-rapidapi-host": "free-nba.p.rapidapi.com",
+    "x-rapidapi-key": "06792a4777msh8a4181f45c0bd14p1ebfd4jsnabf7de7d9b87",
+  },
+};
+
+
+ export function getPlayer_api() {
+
+  return axios.get("https://free-nba.p.rapidapi.com/players", config);
+}
+
+// export function getPlayer_perpage(action) {
+
+//   const { page } = action;
+//   console.log(page)
+//   return axios.get(`https://free-nba.p.rapidapi.com/players/?page=${page || 0}&per_page=25`, config);
+// }
+// get single player data
+ 
+detail.jsx
+
+import React, {useState, useEffect} from 'react'
+import Player from './Player'
+import PropTypes from 'prop-types'
+import {Link} from 'react-router-dom'
+import axios from 'axios';
+
+export default function Detail(props) {
+
+    const [state, setState] = useState();
+    
+    
+    const [player_detail, setPlayer_Detail] = useState(0);
+        
+    
+    let id = window.location.pathname.split("/")[2];
+    console.log(id)
+    var options = {
+      method: "GET",
+
+      url: 'https://free-nba.p.rapidapi.com/players/'+id ,options,
+      headers: {
+        'x-rapidapi-host': 'free-nba.p.rapidapi.com',
+        'x-rapidapi-key': '38e4232f19msh07c40a70d913576p1640d7jsn7cc597f9716e'
+      },
+    };
+
+    useEffect(() => {
+        axios
+        .request(options)
+        .then(function (response) {
+            console.log("response details",response.data)
+            setState(response.data);
+            
+        })
+        .catch(function (error) {
+            console.error(error);
+        });  
+    },[]);
+    // console.log("state",state.first_name)
+    
+   
+
+    return (
+        <>
+        
+        <table>
+            {/* {Player.map((item)=>{
+                const {id, first_name, last_name } = item;
+            })} */}
+            <thead>
+                {/* <th>Id</th>
+                <th>First Name</th> */}
+            </thead>
+            <tbody>
+                {/* {state?.map((card, index)=>{ */}
+                    {/* return( */}
+                        <tr >
+                            {/* <td>{card.id}</td>
+                            <td>{card.first_name}</td> */}
+                            <div className="card text-white bg-secondary mb-3" style={{maxWidth: '35rem'}}>
+                            <div className="card-header"><h2>About Player</h2></div>
+                            <div className="card-body"> 
+                                
+                                <h5 className="card-title" >First Name: {state?.first_name} </h5>
+                                <h5 className="card-title">Last Name: {state?.last_name} </h5>
+                                <h5 className="card-title">Height Feet: {state?.height_feet} </h5>
+                                <h5 className="card-title">Height Inches: {state?.inches} </h5>
+                                <h5 className="card-title">Team Details:- </h5>
+                                <h5 className="card-title">City: {state?.team.city} </h5> 
+                                <h5 className="card-title">Division: {state?.team.division}</h5>
+                                <h5 className="card-title">Full name: {state?.team.full_name}</h5>
+                                <Link to="/Player" className="card-link">Back </Link>
+                                {/* </Link>
+                                 ))} */}
+                              </div>
+                            </div>
+                        </tr>
+                    {/* ); */}
+                {/* })} */}
+            </tbody>
+        </table>
+       
+      </>
+    )
+}
+
+
