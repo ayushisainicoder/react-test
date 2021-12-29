@@ -36,4 +36,17 @@
     transform: rotate(360deg);
   }
 }
+.table-wrap{
+  /* height :500px; */
+  overflow-y: auto;
+}
 
+.container{
+    
+  width : auto;
+  background: #ebebeb;
+  border-radius: 6px;
+  margin: 10px;
+  padding: 5px;
+   
+}

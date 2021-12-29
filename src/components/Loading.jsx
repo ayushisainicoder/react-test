@@ -4,10 +4,12 @@
 //   const [content, setContent] = useState();
 //   const loadData = async () => {
 //     setContent(props.content);
+//     console.log(content, "content")
 //   };
 //   useEffect(() => {
 //     loadData();
 //   }, []);
+  
 //   return (
 //       <>
 //   <div className="loading"></div>
