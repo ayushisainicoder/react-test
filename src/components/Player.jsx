@@ -80,6 +80,7 @@ export default function Player(props) {
   
   
   const handleClick = ()=>{
+    
     console.log("It was clicked:",data);
     // let newData = data.detail.first_name;
     // setData(newData)
@@ -96,27 +97,36 @@ export default function Player(props) {
   //     setPage(page_)
   //   }
   // }
-
+  
+  var newarr = state.filter(function(ele){
+    return (ele.detail.first_name )
+  })
+  console.log(newarr,"newarr")
 
   return(
     <>
     <div className="container"> 
-    <h1> <b> NBA Players List </b> </h1>  
-    <h3>First Name</h3>   
+    <h1 align="left"> <b> NBA Players List </b> </h1>  
+    {/* <h3>First Name</h3>    */}
      <div className="col-sm-5 justify-content-center mt-2">
       {loader.length > -1 && state?.map((detail, index) => {
        return(
-        <ul className="list-group">
+        <ul align="center" className="list-group">
         <li className="list-group-item" data-tip data-for="hovering">
        
           <Link onClick={handleClick} to={`/Detail/${detail.id}`}>
-            {detail.first_name} 
-            <ReactTooltip id="hovering" place="left" type="warning" effect="solid" >
-              {detail.first_name} {detail.last_name}
-            </ReactTooltip>
-          </Link>
+            {detail.first_name} </Link>
+            {/* if {detail.first_name} == {detail.first_name} {detail.last_name}{ */}
+            {detail.first_name === detail.first_name 
+            ?<ReactTooltip id="hovering" place="top" type="warning" effect="solid" >
+            {detail.first_name} {detail.last_name}
+          </ReactTooltip>
+            :""}
+            
+      {/* } */}
+          
         </li>
-        
+        {console.log(detail.first_name , "valuee of detail")}
       </ul>
        )      
       })}            

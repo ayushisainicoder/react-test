@@ -715,3 +715,14 @@ return (
   </>
 );
 }
+
+// var arr = [23,29,50,45,55,80,18,90,245,14,51]
+
+// function filterApp(){
+//   console.log(arr)
+//   var newarr = arr.filter((element, index)=>{
+//     return( element > 50)
+//   })
+//   console.log(newarr)
+// }
+// filterApp()

@@ -12,6 +12,16 @@ import Detail from './components/Detail';
 import Loading from './components/Loading';
 // import './hover.css';
 
+// var arr = [23,29,50,45,55,80,18,90,245,14,51]
+
+// function filterApp(){
+//   console.log(arr)
+//   var newarr = arr.filter((element, index)=>{
+//     return( element > 50)
+//   })
+//   console.log(newarr)
+// }
+// filterApp()
 export default class App extends Component {
   // constructor(props){
   //   super(props)
@@ -19,7 +29,8 @@ export default class App extends Component {
   //     count: 0
   //   }
   // }
-  
+
+
   render() {
     return (
       <>
