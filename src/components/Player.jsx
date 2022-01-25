@@ -98,10 +98,10 @@ export default function Player(props) {
   //   }
   // }
   
-  var newarr = state.filter(function(ele){
-    return (ele.detail.first_name )
-  })
-  console.log(newarr,"newarr")
+  // var newarr = state.filter(function(ele){
+  //   return (ele.detail.first_name )
+  // })
+  // console.log(newarr,"newarr")
 
   return(
     <>
@@ -122,7 +122,9 @@ export default function Player(props) {
             {detail.first_name} {detail.last_name}
           </ReactTooltip>
             :""}
-            
+            {/* <ReactTooltip id="hovering" place="top" type="warning" effect="solid" >
+            {detail.first_name} {detail.last_name}
+          </ReactTooltip> */}
       {/* } */}
           
         </li>
